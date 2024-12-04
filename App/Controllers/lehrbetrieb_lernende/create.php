@@ -6,78 +6,58 @@ use App\Core\Response;
 // Get the database connection
 $db = DatabaseConnection::getDatabase();
 
-// Parse input JSON
+// Read the raw JSON input
 $input = json_decode(file_get_contents('php://input'), true);
 
-// Extract and validate inputs
-$fk_lehrbetrieb = $input['fk_lehrbetrieb'] ?? null;
-$fk_lernende = $input['fk_lernende'] ?? null;
-$start_date = htmlspecialchars($input['start_date'] ?? '', ENT_QUOTES, 'UTF-8');
-$end_date = htmlspecialchars($input['end_date'] ?? '', ENT_QUOTES, 'UTF-8');
+// Sanitize inputs using htmlspecialchars to prevent HTML special characters in the database
+$fk_lehrbetrieb = htmlspecialchars($input['fk_lehrbetrieb'] ?? '', ENT_QUOTES, 'UTF-8');
+$fk_lernende = htmlspecialchars($input['fk_lernende'] ?? '', ENT_QUOTES, 'UTF-8');
+$start = htmlspecialchars($input['start'] ?? '', ENT_QUOTES, 'UTF-8');
+$ende = htmlspecialchars($input['ende'] ?? '', ENT_QUOTES, 'UTF-8');
+$beruf = htmlspecialchars($input['beruf'] ?? '', ENT_QUOTES, 'UTF-8');
 
-// Check required fields
+// Initial validation: check for empty fields
 $errors = [];
-if (!$fk_lehrbetrieb || !ctype_digit($fk_lehrbetrieb)) {
-    $errors['fk_lehrbetrieb'] = 'Valid fk_lehrbetrieb is required.';
-}
-if (!$fk_lernende || !ctype_digit($fk_lernende)) {
-    $errors['fk_lernende'] = 'Valid fk_lernende is required.';
-}
-if (empty($start_date)) {
-    $errors['start_date'] = 'Start date is required.';
-}
+if (empty($fk_lehrbetrieb)) $errors['fk_lehrbetrieb'] = 'Lehrbetrieb ID is required.';
+if (empty($fk_lernende)) $errors['fk_lernende'] = 'Lernende ID is required.';
+if (empty($start)) $errors['start'] = 'Start date is required.';
+if (empty($ende)) $errors['ende'] = 'End date is required.';
+if (empty($beruf)) $errors['beruf'] = 'Beruf is required.';
+
 if (!empty($errors)) {
+    // Send error response in JSON format with a 400 Bad Request status
     Response::json([
         'status' => 'error',
-        'message' => 'Invalid input',
+        'message' => 'Bad request',
         'data' => $errors
     ], Response::BAD_REQUEST);
     exit;
 }
 
+// Insert data into the database
+$query = 'INSERT INTO tbl_lehrbetrieb_lernende (fk_lehrbetrieb, fk_lernende, start, ende, beruf) 
+          VALUES (:fk_lehrbetrieb, :fk_lernende, :start, :ende, :beruf)';
+
 try {
-    // Validate foreign key existence in lehrbetrieb table
-    $stmt = $db->query('SELECT COUNT(*) FROM tbl_lehrbetrieb WHERE id_lehrbetrieb = :id');
-    $stmt->execute([':id' => $fk_lehrbetrieb]);
-    if ($stmt->fetchColumn() == 0) {
-        Response::json([
-            'status' => 'error',
-            'message' => "Lehrbetrieb with ID $fk_lehrbetrieb does not exist."
-        ], Response::BAD_REQUEST);
-        exit;
-    }
-
-    // Validate foreign key existence in lernende table
-    $stmt = $db->query('SELECT COUNT(*) FROM tbl_lernende WHERE id_lernende = :id');
-    $stmt->execute([':id' => $fk_lernende]);
-    if ($stmt->fetchColumn() == 0) {
-        Response::json([
-            'status' => 'error',
-            'message' => "Lernende with ID $fk_lernende does not exist."
-        ], Response::BAD_REQUEST);
-        exit;
-    }
-
-    // Insert the lehrbetrieb_lernende entry
-    $query = 'INSERT INTO tbl_lehrbetrieb_lernende (fk_lehrbetrieb, fk_lernende, start_date, end_date) 
-            VALUES (:fk_lehrbetrieb, :fk_lernende, :start_date, :end_date)';
     $stmt = $db->query($query);
     $stmt->execute([
         ':fk_lehrbetrieb' => $fk_lehrbetrieb,
         ':fk_lernende' => $fk_lernende,
-        ':start_date' => $start_date,
-        ':end_date' => $end_date
+        ':start' => $start,
+        ':ende' => $ende,
+        ':beruf' => $beruf
     ]);
 
-    // Success response
+    // Send success response in JSON format with a 201 Created status
     Response::json([
         'status' => 'success',
-        'message' => 'Lehrbetrieb_lernende created successfully!'
+        'message' => 'Lehrbetrieb-Lernende record created successfully!'
     ], Response::CREATED);
 } catch (Exception $e) {
-    // Handle unexpected errors with a generic error message
+    // Handle unexpected errors with a 500 Internal Server Error response
     Response::json([
         'status' => 'error',
-        'message' => 'An error occurred while creating the entry.'
+        'message' => 'An error occurred while creating the Lehrbetrieb-Lernende record',
+        'data' => ['error' => $e->getMessage()]
     ], Response::SERVER_ERROR);
 }
