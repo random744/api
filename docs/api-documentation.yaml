@@ -1,0 +1,777 @@
+openapi: 3.0.3
+info:
+  title: RESTful API
+  version: 1.0.0
+  contact: {}
+servers:
+  - url: http://api.test
+paths:
+  /lehrbetriebe:
+    get:
+      tags:
+        - lehrbetriebe
+      summary: http://api.test/lehrbetriebe
+      description: http://api.test/lehrbetriebe
+      operationId: httpApiTestLehrbetriebe
+      requestBody:
+        content:
+          text/plain:
+            example: ''
+      responses:
+        '200':
+          description: ''
+    post:
+      tags:
+        - lehrbetriebe
+      summary: http://api.test/lehrbetriebe
+      description: http://api.test/lehrbetriebe
+      operationId: httpApiTestLehrbetriebe1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                firma:
+                  type: string
+                  example: Lehrbetrieb Beispiel GmbH
+                ort:
+                  type: string
+                  example: Musterstadt
+                plz:
+                  type: string
+                  example: '12345'
+                strasse:
+                  type: string
+                  example: Musterstraße 123
+            example:
+              firma: Lehrbetrieb Beispiel GmbH
+              ort: Musterstadt
+              plz: '12345'
+              strasse: Musterstraße 123
+      responses:
+        '200':
+          description: ''
+  /lehrbetriebe/{id}:
+    put:
+      tags:
+        - lehrbetriebe
+      summary: http://api.test/lehrbetriebe/:id
+      description: http://api.test/lehrbetriebe/:id
+      operationId: httpApiTestLehrbetriebeId
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                firma:
+                  type: string
+                  example: Neue Firma GmbH
+                ort:
+                  type: string
+                  example: Chur
+                plz:
+                  type: string
+                  example: '54321'
+                strasse:
+                  type: string
+                  example: Neue Straße 123
+            example:
+              firma: Neue Firma GmbH
+              ort: Chur
+              plz: '54321'
+              strasse: Neue Straße 123
+      responses:
+        '200':
+          description: ''
+    delete:
+      tags:
+        - lehrbetriebe
+      summary: http://api.test/lehrbetriebe/:id
+      description: http://api.test/lehrbetriebe/:id
+      operationId: httpApiTestLehrbetriebeId1
+      responses:
+        '200':
+          description: ''
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          example: '4'
+  /lernende:
+    get:
+      tags:
+        - lernende
+      summary: http://api.test/lernende
+      description: http://api.test/lernende
+      operationId: httpApiTestLernende
+      responses:
+        '200':
+          description: ''
+    post:
+      tags:
+        - lernende
+      summary: http://api.test/lernende
+      description: http://api.test/lernende
+      operationId: httpApiTestLernende1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                birthdate:
+                  type: string
+                  example: '2007-01-01'
+                email:
+                  type: string
+                  example: tb@gmail.com
+                email_privat:
+                  type: string
+                  example: test@gmail.com
+                fk_land:
+                  type: number
+                  example: 1
+                geschlecht:
+                  type: string
+                  example: M
+                handy:
+                  type: string
+                  example: '42'
+                nachname:
+                  type: string
+                  example: Berger
+                ort:
+                  type: string
+                  example: Igis
+                plz:
+                  type: string
+                  example: '94'
+                strasse:
+                  type: string
+                  example: Pasch
+                telefon:
+                  type: string
+                  example: '41'
+                vorname:
+                  type: string
+                  example: Tiziano
+            example:
+              birthdate: '2007-01-01'
+              email: tb@gmail.com
+              email_privat: test@gmail.com
+              fk_land: 1
+              geschlecht: M
+              handy: '42'
+              nachname: Berger
+              ort: Igis
+              plz: '94'
+              strasse: Pasch
+              telefon: '41'
+              vorname: Tiziano
+      responses:
+        '200':
+          description: ''
+  /lernende/{id}:
+    put:
+      tags:
+        - lernende
+      summary: http://api.test/lernende/:id
+      description: http://api.test/lernende/:id
+      operationId: httpApiTestLernendeId
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                birthdate:
+                  type: string
+                  example: '2000-01-01'
+                email:
+                  type: string
+                  example: tb@mail.com
+                email_privat:
+                  type: string
+                  example: ferf
+                fk_land:
+                  type: string
+                  example: '1'
+                geschlecht:
+                  type: string
+                  example: M
+                handy:
+                  type: string
+                  example: '01701234567'
+                nachname:
+                  type: string
+                  example: Gabeö
+                ort:
+                  type: string
+                  example: fgdg
+                plz:
+                  type: string
+                  example: '12345'
+                strasse:
+                  type: string
+                  example: Musterstraße 123
+                telefon:
+                  type: string
+                  example: '0123456789'
+                vorname:
+                  type: string
+                  example: Tim
+            example:
+              birthdate: '2000-01-01'
+              email: tb@mail.com
+              email_privat: ferf
+              fk_land: '1'
+              geschlecht: M
+              handy: '01701234567'
+              nachname: Gabeö
+              ort: fgdg
+              plz: '12345'
+              strasse: Musterstraße 123
+              telefon: '0123456789'
+              vorname: Tim
+      responses:
+        '200':
+          description: ''
+    delete:
+      tags:
+        - lernende
+      summary: http://api.test/lernende/:id
+      description: http://api.test/lernende/:id
+      operationId: httpApiTestLernendeId1
+      responses:
+        '200':
+          description: ''
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          example: '4'
+  /kurse_lernende/{id}:
+    put:
+      tags:
+        - kurse_lernende
+      summary: http://api.test/kurse_lernende/1
+      description: http://api.test/kurse_lernende/1
+      operationId: httpApiTestKurseLernende1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                fk_kurs:
+                  type: number
+                  example: 3
+                fk_lernende:
+                  type: number
+                  example: 3
+                role:
+                  type: string
+                  example: test
+            example:
+              fk_kurs: 3
+              fk_lernende: 3
+              role: test
+      responses:
+        '200':
+          description: ''
+    delete:
+      tags:
+        - kurse_lernende
+      summary: http://api.test/kurse_lernende/:id
+      description: http://api.test/kurse_lernende/:id
+      operationId: httpApiTestKurseLernendeId
+      responses:
+        '200':
+          description: ''
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          example: '4'
+  /kurse_lernende:
+    get:
+      tags:
+        - kurse_lernende
+      summary: http://api.test/kurse_lernende
+      description: http://api.test/kurse_lernende
+      operationId: httpApiTestKurseLernende
+      responses:
+        '200':
+          description: ''
+    post:
+      tags:
+        - kurse_lernende
+      summary: http://api.test/kurse_lernende
+      description: http://api.test/kurse_lernende
+      operationId: httpApiTestKurseLernende1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                fk_kurs:
+                  type: number
+                  example: 6
+                fk_lernende:
+                  type: number
+                  example: 3
+                role:
+                  type: string
+                  example: lehrer
+            example:
+              fk_kurs: 6
+              fk_lernende: 3
+              role: lehrer
+      responses:
+        '200':
+          description: ''
+  /dozenten/{id}:
+    put:
+      tags:
+        - dozent
+      summary: http://api.test/dozenten/:id
+      description: http://api.test/dozenten/:id
+      operationId: httpApiTestDozentenId1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                birthdate:
+                  type: string
+                  example: '1990-01-01'
+                email:
+                  type: string
+                  example: max.mustermann@example.com
+                fk_land:
+                  type: number
+                  example: 1
+                geschlecht:
+                  type: string
+                  example: M
+                handy:
+                  type: string
+                  example: '83483294583957389'
+                nachname:
+                  type: string
+                  example: Mustermann
+                ort:
+                  type: string
+                  example: Musterstadt
+                plz:
+                  type: string
+                  example: '12345'
+                strasse:
+                  type: string
+                  example: Musterstraße 1
+                telefon:
+                  type: string
+                  example: '0123456789'
+                vorname:
+                  type: string
+                  example: Maximilian
+            example:
+              birthdate: '1990-01-01'
+              email: max.mustermann@example.com
+              fk_land: 1
+              geschlecht: M
+              handy: '83483294583957389'
+              nachname: Mustermann
+              ort: Musterstadt
+              plz: '12345'
+              strasse: Musterstraße 1
+              telefon: '0123456789'
+              vorname: Maximilian
+      responses:
+        '200':
+          description: ''
+    delete:
+      tags:
+        - dozent
+      summary: http://api.test/dozenten/:id
+      description: http://api.test/dozenten/:id
+      operationId: httpApiTestDozentenId
+      responses:
+        '200':
+          description: ''
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          example: '3'
+  /dozenten:
+    get:
+      tags:
+        - dozent
+      summary: http://api.test/dozenten
+      description: http://api.test/dozenten
+      operationId: httpApiTestDozenten1
+      responses:
+        '200':
+          description: ''
+    post:
+      tags:
+        - dozent
+      summary: http://api.test/dozenten
+      description: http://api.test/dozenten
+      operationId: httpApiTestDozenten
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                birthdate:
+                  type: string
+                  example: '1990-01-01'
+                email:
+                  type: string
+                  example: max.mustermann@example.com
+                fk_land:
+                  type: number
+                  example: 1
+                geschlecht:
+                  type: string
+                  example: M
+                handy:
+                  type: string
+                  example: kiuk
+                nachname:
+                  type: string
+                  example: User
+                ort:
+                  type: string
+                  example: gfdg
+                plz:
+                  type: string
+                  example: sfdsd
+                strasse:
+                  type: string
+                  example: sdfsdf 1
+                telefon:
+                  type: string
+                  example: jztuj
+                vorname:
+                  type: string
+                  example: Test
+            example:
+              birthdate: '1990-01-01'
+              email: max.mustermann@example.com
+              fk_land: 1
+              geschlecht: M
+              handy: kiuk
+              nachname: User
+              ort: gfdg
+              plz: sfdsd
+              strasse: sdfsdf 1
+              telefon: jztuj
+              vorname: Test
+      responses:
+        '200':
+          description: ''
+  /laender:
+    get:
+      tags:
+        - laender
+      summary: http://api.test/laender
+      description: http://api.test/laender
+      operationId: httpApiTestLaender1
+      responses:
+        '200':
+          description: ''
+    post:
+      tags:
+        - laender
+      summary: http://api.test/laender
+      description: http://api.test/laender
+      operationId: httpApiTestLaender
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                country:
+                  type: string
+                  example: Germany
+            example:
+              country: Germany
+      responses:
+        '200':
+          description: ''
+  /laender/{id}:
+    put:
+      tags:
+        - laender
+      summary: http://api.test/laender/:id
+      description: http://api.test/laender/:id
+      operationId: httpApiTestLaenderId1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                country:
+                  type: string
+                  example: Hungary
+            example:
+              country: Hungary
+      responses:
+        '200':
+          description: ''
+    delete:
+      tags:
+        - laender
+      summary: http://api.test/laender/:id
+      description: http://api.test/laender/:id
+      operationId: httpApiTestLaenderId
+      responses:
+        '200':
+          description: ''
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          example: '1'
+  /kurse/{id}:
+    put:
+      tags:
+        - kurse
+      summary: http://api.test/kurse/:id
+      description: http://api.test/kurse/:id
+      operationId: httpApiTestKurseId
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                dauer:
+                  type: number
+                  example: 10
+                enddatum:
+                  type: string
+                  example: '2024-03-31'
+                fk_dozent:
+                  type: number
+                  example: 3
+                inhalt:
+                  type: string
+                  example: react.
+                kursnummer:
+                  type: string
+                  example: sjdfhjksdf
+                kursthema:
+                  type: string
+                  example: dfgfdgdfg
+                startdatum:
+                  type: string
+                  example: '2024-03-01'
+            example:
+              dauer: 10
+              enddatum: '2024-03-31'
+              fk_dozent: 3
+              inhalt: react.
+              kursnummer: sjdfhjksdf
+              kursthema: dfgfdgdfg
+              startdatum: '2024-03-01'
+      responses:
+        '200':
+          description: ''
+    delete:
+      tags:
+        - kurse
+      summary: http://api.test/kurse/:id
+      description: http://api.test/kurse/:id
+      operationId: httpApiTestKurseId1
+      responses:
+        '200':
+          description: ''
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          example: '4'
+  /kurse:
+    get:
+      tags:
+        - kurse
+      summary: http://api.test/kurse
+      description: http://api.test/kurse
+      operationId: httpApiTestKurse
+      responses:
+        '200':
+          description: ''
+    post:
+      tags:
+        - kurse
+      summary: http://api.test/kurse
+      description: http://api.test/kurse
+      operationId: httpApiTestKurse1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                dauer:
+                  type: number
+                  example: 30
+                enddatum:
+                  type: string
+                  example: '2024-01-31'
+                fk_dozent:
+                  type: number
+                  example: 3
+                inhalt:
+                  type: string
+                  example: svelte
+                kursnummer:
+                  type: string
+                  example: fjdsjfkvd
+                kursthema:
+                  type: string
+                  example: rthtzj
+                startdatum:
+                  type: string
+                  example: '2024-03-11'
+            example:
+              dauer: 30
+              enddatum: '2024-01-31'
+              fk_dozent: 3
+              inhalt: svelte
+              kursnummer: fjdsjfkvd
+              kursthema: rthtzj
+              startdatum: '2024-03-11'
+      responses:
+        '200':
+          description: ''
+  /lehrbetrieb_lernende/{id}:
+    put:
+      tags:
+        - lehrbetrieb_lernende
+      summary: http://api.test/lehrbetrieb_lernende/:id
+      description: http://api.test/lehrbetrieb_lernende/:id
+      operationId: httpApiTestLehrbetriebLernendeId
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                beruf:
+                  type: string
+                  example: Test
+                ende:
+                  type: string
+                  example: '2026-12-31'
+                fk_lehrbetrieb:
+                  type: number
+                  example: 1
+                fk_lernende:
+                  type: number
+                  example: 3
+                start:
+                  type: string
+                  example: '2025-01-01'
+            example:
+              beruf: Test
+              ende: '2026-12-31'
+              fk_lehrbetrieb: 1
+              fk_lernende: 3
+              start: '2025-01-01'
+      responses:
+        '200':
+          description: ''
+    delete:
+      tags:
+        - lehrbetrieb_lernende
+      summary: http://api.test/lehrbetrieb_lernende/:id
+      description: http://api.test/lehrbetrieb_lernende/:id
+      operationId: httpApiTestLehrbetriebLernendeId1
+      responses:
+        '200':
+          description: ''
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          example: '2'
+  /lehrbetrieb_lernende:
+    get:
+      tags:
+        - lehrbetrieb_lernende
+      summary: http://api.test/lehrbetrieb_lernende
+      description: http://api.test/lehrbetrieb_lernende
+      operationId: httpApiTestLehrbetriebLernende
+      responses:
+        '200':
+          description: ''
+    post:
+      tags:
+        - lehrbetrieb_lernende
+      summary: http://api.test/lehrbetrieb_lernende
+      description: http://api.test/lehrbetrieb_lernende
+      operationId: httpApiTestLehrbetriebLernende1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                beruf:
+                  type: string
+                  example: Softwareentwickler
+                ende:
+                  type: string
+                  example: '2024-12-31'
+                fk_lehrbetrieb:
+                  type: number
+                  example: 1
+                fk_lernende:
+                  type: number
+                  example: 3
+                start:
+                  type: string
+                  example: '2024-01-01'
+            example:
+              beruf: Softwareentwickler
+              ende: '2024-12-31'
+              fk_lehrbetrieb: 1
+              fk_lernende: 3
+              start: '2024-01-01'
+      responses:
+        '200':
+          description: ''
+tags:
+  - name: lehrbetriebe
+  - name: lernende
+  - name: kurse_lernende
+  - name: dozent
+  - name: laender
+  - name: kurse
+  - name: lehrbetrieb_lernende
